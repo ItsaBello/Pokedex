@@ -1,36 +1,43 @@
 import './App.css'
 import PokemonCard from './components/PokemonCard'
+import { getPokemonIdFromUrl, getPokemonImgUrl } from "./api/pokemonApi"
 
 function App() {
-const pokemon = [
-  {
-    name: "Bulbasaur",
-    number: 1,
-    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-  },
-  {
-    name: "Ivysaur",
-    number: 2,
-    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
-  },
-  {
-    name: "Venusaur",
-    number: 3,
-    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
-  }
-]
+  
+  const url = "https://pokeapi.co/api/v2/pokemon/1/"
+  const id = getPokemonIdFromUrl(url)
+  const image = getPokemonImgUrl(id)
+  
+  const pokemon = [
+    {
+      name: "Bulbasaur",
+      url: "https://pokeapi.co/api/v2/pokemon/1/"
+    },
+    {
+      name: "Ivysaur",
+      url: "https://pokeapi.co/api/v2/pokemon/2/"
+    },
+    {
+      name: "Venusaur",
+      url: "https://pokeapi.co/api/v2/pokemon/3/"
+    }
+  ]
 
   return (
     <section>
       <div>
         <h1>Who's that Pokemon?</h1>
-        {pokemon.map((pokemon) => (
-          <PokemonCard
+        {pokemon.map((pokemon) => {
+          const id = getPokemonIdFromUrl(pokemon.url)
+          const image = getPokemonImgUrl(id)
+
+          return <PokemonCard
+            key={id}
             name={pokemon.name}
-            number={pokemon.number}
-            image={pokemon.image}
+            number={id}
+            image={image}
           />
-        ))}
+        })}
       </div>
     </section>
   )
