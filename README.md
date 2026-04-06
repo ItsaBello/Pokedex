@@ -1,3 +1,12 @@
+# WORK IN PROGRESS
+
+Achter de schermen:
+- Shinies van alle Pokemon toevoegen
+- Types toevoegen per Pokemon
+- 'Click for more info'
+- Searchbar toevoegen voor losse Pokemon, generaties & types
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
