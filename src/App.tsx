@@ -1,27 +1,24 @@
 import './App.css'
 import PokemonCard from './components/PokemonCard'
 import { getPokemonIdFromUrl, getPokemonImgUrl } from "./api/pokemonApi"
+import { useEffect, useState } from 'react'
+
+type PokemonListItem = {
+  name: string
+  url: string
+}
 
 function App() {
-  
-  const url = "https://pokeapi.co/api/v2/pokemon/1/"
-  const id = getPokemonIdFromUrl(url)
-  const image = getPokemonImgUrl(id)
-  
-  const pokemon = [
-    {
-      name: "Bulbasaur",
-      url: "https://pokeapi.co/api/v2/pokemon/1/"
-    },
-    {
-      name: "Ivysaur",
-      url: "https://pokeapi.co/api/v2/pokemon/2/"
-    },
-    {
-      name: "Venusaur",
-      url: "https://pokeapi.co/api/v2/pokemon/3/"
+  const [pokemon, setPokemon] = useState<PokemonListItem[]>([])
+
+  useEffect(() => {
+    async function fetchPokemon() {
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
+      const data = await response.json()
+      setPokemon(data.results)
     }
-  ]
+    fetchPokemon()
+  }, [])  
 
   return (
     <section>
@@ -30,14 +27,14 @@ function App() {
         {pokemon.map((pokemon) => {
           const id = getPokemonIdFromUrl(pokemon.url)
           const image = getPokemonImgUrl(id)
-
-          return <PokemonCard
-            key={id}
-            name={pokemon.name}
-            number={id}
-            image={image}
+          return (
+          <PokemonCard
+            key = {id}
+            name = {pokemon.name}
+            number = {id}
+            image = {image}
           />
-        })}
+        )})}
       </div>
     </section>
   )

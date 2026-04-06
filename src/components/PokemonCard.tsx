@@ -1,3 +1,5 @@
+import './PokemonCard.css'
+
 type PokemonCardProps = {
     name: string
     number: number
