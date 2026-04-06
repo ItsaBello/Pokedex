@@ -21,20 +21,22 @@ function App() {
   }, [])  
 
   return (
-    <section>
-      <div>
-        <h1>Who's that Pokemon?</h1>
-        {pokemon.map((pokemon) => {
-          const id = getPokemonIdFromUrl(pokemon.url)
-          const image = getPokemonImgUrl(id)
-          return (
-          <PokemonCard
-            key = {id}
-            name = {pokemon.name}
-            number = {id}
-            image = {image}
-          />
-        )})}
+    <section className="pokedex">
+      <div className="pokedex-container">
+        <h1 className="pokedex-title">Who's that Pokemon?</h1>
+        <div className="pokemon-grid">
+          {pokemon.map((pokemon) => {
+            const id = getPokemonIdFromUrl(pokemon.url)
+            const image = getPokemonImgUrl(id)
+            return (
+            <PokemonCard
+              key = {id}
+              name = {pokemon.name}
+              number = {id}
+              image = {image}
+            />
+          )})}
+        </div>
       </div>
     </section>
   )
