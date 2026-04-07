@@ -8,8 +8,15 @@ type PokemonListItem = {
   url: string
 }
 
+type SelectedPokemon = {
+  name: string
+  number: number
+  image: string
+}
+
 function App() {
   const [pokemon, setPokemon] = useState<PokemonListItem[]>([])
+  const [selectedPokemon, setSelectedPokemon] = useState<SelectedPokemon | null>(null)
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -19,6 +26,8 @@ function App() {
     }
     fetchPokemon()
   }, [])  
+
+  console.log(selectedPokemon)
 
   return (
     <section className="pokedex">
@@ -34,9 +43,26 @@ function App() {
               name = {pokemon.name}
               number = {id}
               image = {image}
+              onClick = {() => {
+                console.log("geklikt", pokemon.name)
+                setSelectedPokemon({
+                  name: pokemon.name, 
+                  number: id, 
+                  image: image})
+              }}
             />
           )})}
-        </div>
+        </div>  
+
+          {selectedPokemon && (
+            <div className = "overlay" onClick= {() => setSelectedPokemon(null)}>
+              <div className = "overlay-card" onClick= {(e) => e.stopPropagation()}>
+                <img src={selectedPokemon.image} alt={selectedPokemon.name} />
+                <h2>{selectedPokemon.name}</h2>
+                <p>#{selectedPokemon.number.toString().padStart(4, "0")}</p>
+              </div>
+            </div>
+          )}
       </div>
     </section>
   )

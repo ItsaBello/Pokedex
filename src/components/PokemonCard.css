@@ -5,19 +5,26 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     margin: 8px;
+    min-height: 190px;
     padding: 2px;
+    pointer-events: pointer;
+    position: relative;
     text-align: center;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
     width: 125px;
+    z-index: 1;
 }
 
 .pokemon-card:hover {
     transform: scale(1.05);
 }
 
-h2 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.pokemon-card h2 {
     font-size: 18px;
-    margin: 8px 0 4px 0;
+    padding-top: 15px;
     text-transform: capitalize;
+}
+
+.pokemon-card img {
+    padding-top: 15px;
 }
